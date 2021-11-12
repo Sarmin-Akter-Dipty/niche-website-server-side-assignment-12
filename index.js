@@ -111,7 +111,7 @@ async function run() {
             const result = await orderCollection.updateOne(filter, updateDocument, options)
             res.send(result)
         })
-        app.delete('/items/:id', async (req, res) => {
+        app.delete('/explore/:id', async (req, res) => {
             const id = req.params.id;
             console.log(id);
             const query = { _id: ObjectId(id) };
