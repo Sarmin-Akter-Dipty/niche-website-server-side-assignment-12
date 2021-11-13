@@ -30,6 +30,7 @@ async function run() {
         const itemsCollection = database.collection('phones');
         const orderCollection = database.collection('order');
         const usersCollection = database.collection('users');
+        const reviewCollection = database.collection('review');
 
         //Get Products Api
         app.get('/items', async (req, res) => {
@@ -146,6 +147,19 @@ async function run() {
             const result = await usersCollection.updateOne(filter, updateDoc)
             res.json(result)
         })
+
+        // review
+        app.post("/addReview", async (req, res) => {
+            const user = req.body
+            const result = await reviewCollection.insertOne(user);
+            res.send(result);
+        });
+        app.get('/review', async (req, res) => {
+            const cursor = await reviewCollection.find({}).toArray()
+            res.json(cursor)
+
+        })
+
 
 
     }
